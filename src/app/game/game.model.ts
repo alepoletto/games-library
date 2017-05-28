@@ -5,7 +5,9 @@ export class Game {
     public title: string,
     public imageUrl: string,
     public description: string,
-    public returnDate: Date
+    public rented: boolean,
+    public returnDate: Date,
+    public user: string
   ) {}
 
 }

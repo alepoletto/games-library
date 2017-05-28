@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +9,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  loadedFeature = 'games';
+  constructor(private authService: AuthService){}
 
-  onNavigate(feature: string){
-    this.loadedFeature = feature;
+  ngOnInit(){
+    let config = {
+      apiKey: "AIzaSyAYtUqfgrWHFOetb5Jtsb8pghuTXIu6QU8",
+    authDomain: "game-library-6da4c.firebaseapp.com"
+    };
+    firebase.initializeApp(config);
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user != null) {
+        this.authService.getToken();
+      }
+
+    });
   }
 }

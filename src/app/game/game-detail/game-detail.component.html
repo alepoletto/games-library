@@ -5,7 +5,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <h1>{{game.name}}</h1>
+    <h1>{{game.title}}</h1>
   </div>
 </div>
 <div class="row">
@@ -13,9 +13,14 @@
     {{game.description}}
   </div>
 </div>
+<div class="row" *ngIf="game.rented">
+  <div class="col-xs-12">
+    <div class="alert alert-info" role="alert">Rented by {{game.user}} untill {{game.returnDate}}</div>
+  </div>
+</div>
 <div class="row">
   <div class="col-xs-12">
-    <button class="btn-primary" (click)="rentGame()">Rent</button>
-    <button class="btn-success" (click)="editGame()">edit</button>
+    <button class="btn btn-primary" (click)="rentGame()" [disabled]="game.rented">Rent</button>
+    <button class="btn btn-success" (click)="editGame()">edit</button>
   </div>
 </div>

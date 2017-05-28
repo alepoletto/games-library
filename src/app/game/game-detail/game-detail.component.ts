@@ -25,7 +25,7 @@ export class GameDetailComponent implements OnInit {
   }
 
   rentGame(){
-    this.gameService.rent(this.game);
+    this.gameService.rent(this.id,this.game);
   }
 
   editGame(){
