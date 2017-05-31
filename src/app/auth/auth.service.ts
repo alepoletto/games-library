@@ -15,9 +15,7 @@ export class AuthService {
   }
 
   async signinUser(email:string, password:string){
-    console.log(email);
     let resp = await firebase.auth().signInWithEmailAndPassword(email,password);
-    console.log(resp);
     this.token = await firebase.auth().currentUser.getIdToken();
     this.router.navigate(['/']);
   }
