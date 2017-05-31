@@ -3,10 +3,26 @@
     <hr>
     <ul class="list-group" *ngFor="let game of rentedGames">
       <div class="row">
-        <a style="cursor: pointer" class="list-group-item">
-          {{game.title}} to {{game.returnDate | date:'dd/MM/yyyy'}}
-        </a>
-        <button type="button" class="btn btn-danger" (click)="returnGame(game)" [disabled]="isUser(game)">Return</button>
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{game.title}}</h3>
+          </div>
+          <div class="panel-body">
+              <div class="row">
+                <div class="col-xs-10">
+                  <h3 class="col-xs-8">Rented by {{game.user}}</h3>
+                  <img [src]="game.imageUrl" alt="" class="img-responsive " style="max-height: 50px">
+                </div>
+              </div>
+              <h3 class="col-xs-8">return date <strong>{{game.returnDate | date:'dd/MM/yyyy'}}</strong></h3>
+            <div class="btn-group col-xs-8">
+              <button type="button" class="btn btn-danger" (click)="returnGame(game)" [disabled]="isUser(game)">Return</button>
+            </div>
+          </div>
+
+        </div>
+
+
       </div>
     </ul>
   </div>
