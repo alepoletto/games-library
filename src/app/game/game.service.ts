@@ -1,6 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Game } from './game.model';
-import { RentService } from '../rent/rent.service';
 import { Subject} from 'rxjs/Subject';
 import { Http, Response } from '@angular/http';
 import { AuthService } from '../auth/auth.service';
@@ -15,7 +14,7 @@ export class GameService {
 
   games: Game[] = [];
 
-  constructor(private rentService: RentService, private http: Http, private authService: AuthService ){}
+  constructor(private http: Http, private authService: AuthService ){}
 
   fetchGames(){
     const token = this.authService.getToken();
@@ -32,16 +31,28 @@ export class GameService {
     });
   }
 
+  fetchRentedGames(){
+    this.fetchGames();
+  }
+
   saveGame(game: Game){
     const token = this.authService.getToken();
+    game.id = this.games.length;
     this.games.push(game);
     this.newGames.next(this.games);
     return this.http.put('https://game-library-6da4c.firebaseio.com/games.json?auth='+ token,  this.games);
+  }
 
+  returnGame(game:Game){
+    game.rented = false;
+    game.returnDate = null;
+    game.user = null;
+    this.updateGame(game.id, game).subscribe(()=>{});
   }
 
   updateGame(id:number, game: Game){
     const token = this.authService.getToken();
+    game.id = id;
     this.games[id] = game;
     this.newGames.next(this.games);
     return this.http.put('https://game-library-6da4c.firebaseio.com/games.json?auth='+ token,  this.games);
@@ -62,6 +73,6 @@ export class GameService {
     game.rented = true;
     game.returnDate = this.nextweek();
     game.user = this.authService.getCurrentUser().email;
-    this.updateGame(id,game);
+    return this.updateGame(id,game);
   }
 }

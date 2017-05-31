@@ -26,7 +26,7 @@ import { GameService } from '../game/game.service';
     AppRoutingModule,
     HeaderComponent
   ],
-  providers: [RentService, UserService, AuthService, AuthGuard,GameService]
+  providers: [GameService, RentService, UserService, AuthService, AuthGuard]
 })
 export class CoreModule {
 

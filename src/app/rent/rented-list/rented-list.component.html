@@ -2,9 +2,12 @@
   <div class="col-xs-10">
     <hr>
     <ul class="list-group" *ngFor="let game of rentedGames">
-      <a style="cursor: pointer" class="list-group-item">
-        {{game.title}} to {{game.returnDate}}
-      </a>
+      <div class="row">
+        <a style="cursor: pointer" class="list-group-item">
+          {{game.title}} to {{game.returnDate | date:'dd/MM/yyyy'}}
+        </a>
+        <button type="button" class="btn btn-danger" (click)="returnGame(game)" [disabled]="isUser(game)">Return</button>
+      </div>
     </ul>
   </div>
 </div>

@@ -16,7 +16,6 @@ export class GameDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.route.params.subscribe((params:Params) => {
       this.id = +params['id'];
       this.game = this.gameService.getGame(this.id);
@@ -25,7 +24,9 @@ export class GameDetailComponent implements OnInit {
   }
 
   rentGame(){
-    this.gameService.rent(this.id,this.game);
+    this.gameService.rent(this.id,this.game).subscribe(() => {
+
+    });
   }
 
   editGame(){

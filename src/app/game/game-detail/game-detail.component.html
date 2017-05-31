@@ -15,7 +15,7 @@
 </div>
 <div class="row" *ngIf="game.rented">
   <div class="col-xs-12">
-    <div class="alert alert-info" role="alert">Rented by {{game.user}} untill {{game.returnDate}}</div>
+    <div class="alert alert-info" role="alert">Rented by {{game.user}} untill {{game.returnDate | date:'dd/MM/yyyy'}}</div>
   </div>
 </div>
 <div class="row">

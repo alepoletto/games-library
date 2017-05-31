@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { AuthService } from './auth/auth.service';
+import config  from './config/config.json';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +13,6 @@ export class AppComponent {
   constructor(private authService: AuthService){}
 
   ngOnInit(){
-    let config = {
-      apiKey: "AIzaSyAYtUqfgrWHFOetb5Jtsb8pghuTXIu6QU8",
-    authDomain: "game-library-6da4c.firebaseapp.com"
-    };
     firebase.initializeApp(config);
     firebase.auth().onAuthStateChanged((user) => {
       if(user != null) {

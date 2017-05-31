@@ -1,16 +1,22 @@
 import { Game } from '../game/game.model';
+import { EventEmitter, Injectable } from '@angular/core';
+import { GameService } from '../game/game.service';
 
+@Injectable()
 export class RentService {
+
+  constructor(private gameService: GameService){}
 
   rentedGames = [];
 
-  rent(game: Game){
-    game.rented = true;
-    this.rentedGames.push(game);
+  getRentedGames(){
+    this.gameService.fetchRentedGames();
+    return this.gameService.newGames;
   }
 
-  getRentedGames(){
-    return this.rentedGames;
+  returnGame(game:Game){
+    this.gameService.returnGame(game);
   }
+
 
 }
